@@ -100,8 +100,8 @@ class C45:
             for i in range(len(data)-1):
                 if(sorted_data[i][-1] != sorted_data[i+1][-1]):
                     split_val=sorted_data[i][attrib]
-                    more=sorted_data[0:i]
-                    less=sorted_data[i:-1]
+                    more=sorted_data[:i+1]
+                    less=sorted_data[i+1:]
                     test_gain=self.calc_gain(data,more,less)
                     if (test_gain > best_gain):
                         best_attrib=attrib
