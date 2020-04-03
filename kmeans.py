@@ -33,7 +33,7 @@ for k in range(1, n + 1):
     SSQList.append(SSQ(data, clusters))
 
 plt.plot(numbers, SSQList)
-plt.title('the elbow method')
+plt.title('The Elbow Method')
 plt.xlabel('Number of clusters')
 plt.ylabel('SSQ')
 plt.show()
