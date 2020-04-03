@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 """
 Created on Sun Mar 29 19:40:53 2020
@@ -77,7 +76,7 @@ minSupportCount = 60 #lowest amount of a single product that was bought gotten a
 minSupport = minSupportCount/totalTrans
 minConfidence = 0.60
         #this is just the path to the dataset location   
-retail = 'C:/Users/peter/OneDrive/Documents/cp 465/retail_dataset.csv'
+retail = 'https://raw.githubusercontent.com/myku5980/465_final_proj/master/retail_dataset.csv'
 #creates dataframe from dataset csv
 retail_DF = pd.read_csv(retail)
 #creates series table that counts frequency of itemsets that can also be pruned alter
@@ -259,12 +258,12 @@ print
 print("fetching Sets to be used for rule generation ")
 print(itemRule)
 
-#ac
-while i < len(itemSetRuleARR): 
+#accositation rules will begin to be created below
+while i < len(itemSetRuleARR): #length of array carrying all our itemsets used for rule generation
     rules = pd.DataFrame(columns = ['item','withProd','conf','minConf','rule'])
     
     print("forming rules for: ",itemRule[i])
-    
+    #creates power sets
     #print("Relevant sub sets: ")
     sublist = list(powerset(itemRule[i]))
     res = np.asarray(sublist[0:len(sublist)-1])
@@ -273,11 +272,13 @@ while i < len(itemSetRuleARR):
     withProd = []
     
    
-    
+    #final association rule block done by Peter Mykulak
     j = 0
     while j < len(res):
         y = 0
         #print("test1")
+        #fills arrToDel to be used as s in the formula s->(l-s)
+        #itemRule[i]  repesnts l
         arrToDel = []
         while y < len(res[j]):
             arrToDel.append(res[j][y])    
@@ -288,6 +289,7 @@ while i < len(itemSetRuleARR):
         rule = 'yes'
         wpSupport = 0
         iSupport = 0
+        #subtracts arrtoDell from itemrule[i] using the formula arrToDel->(itemrule[i]-arrtodel)
         withProd = list_subtract(arrToDel,itemRule[i])   
         itemSet = (arrToDel)
         print(itemSet,"->",withProd)
