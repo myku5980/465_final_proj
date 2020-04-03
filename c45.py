@@ -38,7 +38,6 @@ class C45:
             data_row_l=data_row_s.split(",")
             if(len(data_row_l)==self.num_attribute+1):
                 for i in range(self.num_attribute):
-                    #print(data_row_l[i])
                     data_row_l[i]=float(data_row_l[i])
             self.data.append(data_row_l)
             temp = data_file.readline()
@@ -71,7 +70,6 @@ class C45:
                 class_cnt_lst[self.classes.index(i[-1])] += 1
         for i in range(len(class_cnt_lst)):
             class_cnt_lst[i]=float(class_cnt_lst[i]/num_rows)
-        #print(class_cnt_lst)
         entropy=0
         for i in class_cnt_lst:
             if (i!=0):
@@ -115,17 +113,14 @@ class C45:
     def build_decision_tree(self):
         info =self.num_classes_in_data(self.data)
         d_tree=tree.Node(str(info[1][0]), 1.0)
-        #print(info[0])
         if (info[0] > 1):
             d_tree=self.build_decision_tree_r(self.data,tree.Node("",1))
         else:
             d_tree=tree.Node(str(info[1][0]), 1.0)
         d_tree.print_tree(d_tree)
-
     def build_decision_tree_r(self,data,d_tree):
         t_node=d_tree
         info =self.num_classes_in_data(data)
-        #print(info)
         if (info[0] > 1):
             split_info=self.determine_best_split(data)
             t_node.info="Split by " +self.attributes[split_info[0]]+ " on interval "+str(split_info[3])
